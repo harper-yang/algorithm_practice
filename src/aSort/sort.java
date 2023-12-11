@@ -1,0 +1,111 @@
+package aSort;
+
+public class sort {
+
+    public static void bubbleSort(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+        for (int i = arr.length - 1; i > 0; i--) {  // 每轮比较确定一个最大值
+            for (int j = 0; j < i; j++) {
+                if (arr[j] > arr[j + 1]) {  //比较相邻两个数，大的挪到后面
+                    swap(arr, j, j + 1);
+                }
+            }
+        }
+    }
+
+    public static void selectSort(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+        for (int i = 0; i < arr.length - 1; i++) {  // 每轮比较确定一个最小值
+            int minIndex = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                minIndex = arr[minIndex] > arr[j] ? j : minIndex;   // 定一个初始值，后面每个数和初始位置的值比较。
+            }
+            swap(arr, i, minIndex);
+        }
+    }
+
+
+    // 数组中交换i和j位置的数
+    public static void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+
+    // 相同的数 ^ 结果为0，一个数 ^ 0 结果为该数 Note：i 和 j不能在内存中为一个数
+    public static void swap2(int[] arr, int i, int j) {
+        arr[i] = arr[i] ^ arr[j];
+        arr[j] = arr[i] ^ arr[j];
+        arr[i] = arr[i] ^ arr[j];
+    }
+
+
+    // 对数器
+    public static void main(String[] args) {
+        // 随机数组最大长度
+        int N = 200;
+        // 随机数组每个值，在1~V之间等概率随机
+        int V = 1000;
+        // testTimes : 测试次数
+        int testTimes = 1;
+        System.out.println("测试开始");
+        for (int i = 0; i < testTimes; i++) {
+            // 随机得到一个长度，长度在[0~N-1]
+            int n = (int) (Math.random() * N);
+            // 得到随机数组
+            int[] arr = randomArray(n, V);
+            int[] arr1 = copyArray(arr);
+            int[] arr2 = copyArray(arr);
+            selectSort(arr1);
+            bubbleSort(arr2);
+            if (!sameArray(arr1, arr2)) {
+                System.out.println("出错了!");
+                // 当有错了
+                // 打印是什么例子，出错的
+                // 打印三个功能，各自排序成了什么样
+                // 可能要把例子带入，每个方法，去debug！
+            }
+        }
+        System.out.println("测试结束");
+    }
+
+    // 为了验证
+    // 得到一个随机数组，长度是n
+    // 数组中每个数，都在1~v之间，随机得到
+    public static int[] randomArray(int n, int v) {
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            // Math.random() -> double -> [0,1)范围山的一个小数，0.37463473126、0.001231231，等概率！
+            // Math.random() * v -> double -> [0,v)一个小数，依然等概率
+            // (int)(Math.random() * v) -> int -> 0 1 2 3 ... v-1，等概率的！
+            // (int) (Math.random() * v) + 1 -> int -> 1 2 3 .... v，等概率的！
+            arr[i] = (int) (Math.random() * v) + 1;
+        }
+        return arr;
+    }
+
+    // 为了验证
+    public static int[] copyArray(int[] arr) {
+        int n = arr.length;
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) {
+            ans[i] = arr[i];
+        }
+        return ans;
+    }
+
+    // 为了验证
+    public static boolean sameArray(int[] arr1, int[] arr2) {
+        int n = arr1.length;
+        for (int i = 0; i < n; i++) {
+            if (arr1[i] != arr2[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
