@@ -1,6 +1,8 @@
-package aSort;
+package sort;
 
-public class sort {
+import java.util.Arrays;
+
+public class SimpleSort {
 
     public static void bubbleSort(int[] arr) {
         if (arr == null || arr.length < 2) {
@@ -14,7 +16,6 @@ public class sort {
             }
         }
     }
-
     public static void selectSort(int[] arr) {
         if (arr == null || arr.length < 2) {
             return;
@@ -28,6 +29,14 @@ public class sort {
         }
     }
 
+    public static void insertSort(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
+                swap(arr, j, j + 1);
+
+            }
+        }
+    }
 
     // 数组中交换i和j位置的数
     public static void swap(int[] arr, int i, int j) {
@@ -47,7 +56,7 @@ public class sort {
     // 对数器
     public static void main(String[] args) {
         // 随机数组最大长度
-        int N = 200;
+        int N = 1000;
         // 随机数组每个值，在1~V之间等概率随机
         int V = 1000;
         // testTimes : 测试次数
@@ -61,9 +70,10 @@ public class sort {
             int[] arr1 = copyArray(arr);
             int[] arr2 = copyArray(arr);
             selectSort(arr1);
-            bubbleSort(arr2);
+            insertSort(arr2);
             if (!sameArray(arr1, arr2)) {
                 System.out.println("出错了!");
+                System.out.println(Arrays.toString(arr2));
                 // 当有错了
                 // 打印是什么例子，出错的
                 // 打印三个功能，各自排序成了什么样
