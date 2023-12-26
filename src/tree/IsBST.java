@@ -17,7 +17,6 @@ public class IsBST {
         return isBST(head.right);
     }
 
-
     public static void main(String[] args) {
         /*
             1
