@@ -34,7 +34,27 @@ public class KMP {
     }
 
     private static int[] getNextArray(char[] arr) {
-
-
+        // 先确定 0，1位置的值
+        if (arr.length == 1) {
+            return new int[]{-1};
+        }
+        int[] next = new int[arr.length];
+        next[0] = -1;
+        next[1] = 0;
+        int i = 2; // next数组的位置
+        int cn = 0; // i-1要去比较的数组位置
+        while (i < next.length) {
+            if (next[i - 1] == next[cn]) {
+                // 相等，i位置的前缀数+1
+                next[i++] = ++cn;
+            } else if (cn > 0) {
+                // cn不在0位置，表示还能往前跳
+                cn = next[cn];
+            } else {
+                // cn0位置都不等，表示前缀数为0
+                next[i++] = 0;
+            }
+        }
+        return next;
     }
 }
