@@ -1,10 +1,5 @@
 package linkList;
 
-import sort.HeapSort;
-
-import javax.swing.plaf.ComponentUI;
-import java.awt.desktop.SystemSleepEvent;
-import java.util.Currency;
 import java.util.Stack;
 
 public class IsPalindrome {

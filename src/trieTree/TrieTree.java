@@ -1,7 +1,5 @@
 package trieTree;
 
-import tree.Node;
-
 /**
  * 前缀树
  */
@@ -20,7 +18,7 @@ public class TrieTree {
         char[] chars = word.toCharArray();
         TrieNode node = root;
         node.pass++;
-        for (char c :chars){
+        for (char c : chars) {
             // 对应走哪条路
             int index = c - 'a';
             if (node.nexts[index] == null) {
