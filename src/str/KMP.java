@@ -1,4 +1,4 @@
-package kmp;
+package str;
 
 public class KMP {
 
